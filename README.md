@@ -1,6 +1,6 @@
-# Nextflow training for CRG PhD course 2020
+# Nextflow training for CRG PhD course 2021
 
-Project repository for the Nextflow introductory training taking place online on the 11th of November 2020 in the framework of the CRG PhD introductory course 2020.
+Project repository for the Nextflow introductory training taking place online on the 18th of October 2021 in the framework of the CRG PhD introductory course 2021.
 
 ## Table of Contents
 
@@ -70,7 +70,7 @@ A workflow engine for data analysis pipelines with a strong focus on enabling:
 Clone this repository with the following command: 
 
 ```
-git clone https://github.com/cbcrg/nf-phdcourse20.git && cd nf-phdcourse20 
+git clone https://github.com/cbcrg/nf-phdcourse21.git && cd nf-phdcourse21 
 ```
 
 Then, install Nextflow by using the following command: 
