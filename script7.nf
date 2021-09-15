@@ -1,10 +1,4 @@
 /* 
- * This code enables the new dsl of Nextflow. 
- */
-
-nextflow.enable.dsl=2
-
-/* 
  * pipeline input parameters 
  */
 params.reads = "$baseDir/data/ggal/gut_{1,2}.fq"
@@ -21,7 +15,7 @@ log.info """\
          """
          .stripIndent()
 
-
+ 
 /* 
  * define the `index` process that create a binary index 
  * given the transcriptome file
@@ -29,10 +23,10 @@ log.info """\
 process index {
     
     input:
-    path transcriptome
-    
+    path transcriptome from params.transcript
+     
     output:
-    path 'index'
+    path 'index' into index_ch
 
     script:       
     """
@@ -40,19 +34,24 @@ process index {
     """
 }
 
+
+Channel 
+    .fromFilePairs( params.reads, checkIfExists:true )
+    .into { read_pairs_ch; read_pairs2_ch } 
+
 /*
  * Run Salmon to perform the quantification of expression using
  * the index and the matched read files
  */
 process quantification {
-    
+     
     input:
-    path index
-    tuple val(pair_id), path(reads)
-
+    path index from index_ch
+    tuple val(pair_id), path(reads) from read_pairs_ch
+ 
     output:
-    path(pair_id)
-
+    path(pair_id) into quant_ch
+ 
     script:
     """
     salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
@@ -66,10 +65,10 @@ process fastqc {
     tag "FASTQC on $sample_id"
 
     input:
-    tuple val(sample_id), path(reads)
+    tuple val(sample_id), path(reads) from read_pairs2_ch
 
     output:
-    path("fastqc_${sample_id}_logs")
+    path("fastqc_${sample_id}_logs") into fastqc_ch
 
     script:
     """
@@ -86,7 +85,7 @@ process multiqc {
     publishDir params.outdir, mode:'copy'
 
     input:
-    path('*')
+    path('*') from quant_ch.mix(fastqc_ch).collect()
 
     output:
     path('multiqc_report.html')
@@ -95,15 +94,6 @@ process multiqc {
     """
     multiqc .
     """
-}
-
-workflow {
-    read_pairs_ch = Channel.fromFilePairs( params.reads, checkIfExists:true )
-    
-    index_out   = index( params.transcript )
-    quant_out   = quantification( index_out, read_pairs_ch )
-    fastqc_out  = fastqc( read_pairs_ch )
-    multiqc_out = multiqc( quant_out.mix(fastqc_out).collect() )
 }
 
 workflow.onComplete { 
