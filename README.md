@@ -70,11 +70,7 @@ A workflow engine for data analysis pipelines with a strong focus on enabling:
 Clone this repository with the following command: 
 
 ```
-<<<<<<< Updated upstream
-git clone https://github.com/cbcrg/nf-phdcourse21.git && cd nf-phdcourse21 
-=======
 git clone https://github.com/cbcrg/nf-phdcourse21.git && cd nf-phdcourse21
->>>>>>> Stashed changes
 ```
 
 Then, install Nextflow by using the following command: 
