@@ -1,4 +1,10 @@
 /* 
+ * This code enables the new dsl of Nextflow. 
+ */
+
+nextflow.enable.dsl=2
+
+/* 
  * pipeline input parameters 
  */
 params.reads = "$baseDir/data/ggal/gut_{1,2}.fq"
@@ -15,5 +21,4 @@ log.info """\
          """
          .stripIndent()
 
-
-read_pairs_ch = Channel .fromFilePairs(params.reads)
+read_pairs_ch = Channel .fromFilePairs( params.reads )
