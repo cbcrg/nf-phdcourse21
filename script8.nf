@@ -26,8 +26,9 @@ log.info """\
  
 include { rnaseqFlow } from './rnaseq-flow.nf'
 
+read_pairs_ch = Channel.fromFilePairs( params.reads, checkIfExists:true )
+    
 workflow {
-    read_pairs_ch = Channel .fromFilePairs( params.reads, checkIfExists:true )
     rnaseqFlow( params.transcript, read_pairs_ch )
 }
 

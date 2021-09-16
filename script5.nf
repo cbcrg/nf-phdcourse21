@@ -21,6 +21,7 @@ log.info """\
          """
          .stripIndent()
 
+read_pairs_ch = Channel.fromFilePairs( params.reads, checkIfExists:true )
 
 /* 
  * define the `index` process that create a binary index 
@@ -79,9 +80,7 @@ process fastqc {
 }  
 
 workflow {
-    read_pairs_ch = Channel.fromFilePairs( params.reads, checkIfExists:true )
-    
-    index_out = index(params.transcript)
-    quant_out = quantification(index_out, read_pairs_ch)
-    fastqc_out = fastqc(read_pairs_ch)
+    index( params.transcript )
+    quantification( index.out, read_pairs_ch )
+    fastqc( read_pairs_ch )
 }

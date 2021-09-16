@@ -97,11 +97,11 @@ process multiqc {
     """
 } 
 
-workflow {
-    read_pairs_ch = Channel.fromFilePairs( params.reads, checkIfExists:true )
-    
-    index_out   = index( params.transcript )
-    quant_out   = quantification( index_out, read_pairs_ch )
-    fastqc_out  = fastqc( read_pairs_ch )
-    multiqc_out = multiqc( quant_out.mix(fastqc_out).collect() )
+read_pairs_ch = Channel.fromFilePairs( params.reads, checkIfExists:true )
+
+workflow {    
+    index( params.transcript )
+    quantification( index.out, read_pairs_ch )
+    fastqc( read_pairs_ch )
+    multiqc( quantification.out.mix(fastqc.out).collect() )
 }

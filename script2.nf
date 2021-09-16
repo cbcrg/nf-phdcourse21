@@ -47,5 +47,5 @@ process index {
  */
 
 workflow {
-    result = index(params.transcript)
+    index( params.transcript )
 }
