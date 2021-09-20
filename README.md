@@ -18,12 +18,12 @@ Project repository for the Nextflow introductory training taking place online on
     * [7 - Handle completion event](#Step-7---Handle-completion-event)
     * [8 - Custom scripts](#Step-8---Custom-scripts)
     * [9 - Executors](#Step-9---Executors)
-    * [10 - Run in the cloud using AWS Batch](#Step-10---Run-in-the-cloud-using-AWS-Batch)
+    * [10 - Modularization with DSL2](#Step-10---Modularization-with-DSL2)
     * [11 - Use configuration profiles](#Step-11---Use-configuration-profiles)
     * [12 - Run a pipeline from a GitHub repository](#Step-12---Run-a-pipeline-from-a-GitHub-repository)
     * [13 - Conda/Bioconda packages](#Step-13---Condabioconda-packages)
     * [14 - Metrics and reports](#Step-14---Metrics-and-reports)
-    * [15 - Modularization with DSL2](#Step-15---Modularization-with-DSL2)
+    * [15 - Run in the cloud using AWS Batch](#Step-10---Run-in-the-cloud-using-AWS-Batch)
 * [Docker hands-on](#Docker-hands-on)
     * [1 - Run a container](#Step-1---Run-a-container)
     * [2 - Pull a container](#Step-2---Pull-a-container)
@@ -233,11 +233,11 @@ Try it again specifying different read files by using a glob pattern:
 #### Exercise 3.1 
 
 Use the [set](https://www.nextflow.io/docs/latest/operator.html#set) operator in place 
-of `=` assignment to define the `read_pairs_ch` channel. 
+of `=` assignment to define the `read_pairs_ch` channel.
 
 #### Exercise 3.2 
 
-Use the `checkIfExists` for the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) method to make sure it returns some file pairs. 
+Use the `checkIfExists` for the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) method to make sure it returns some file pairs.
 
 
 #### Recap 
@@ -492,27 +492,23 @@ In this step you have learned:
 1. How to deploy a pipeline in a computing cluster. 
 2. How to specify different computing resources for different pipeline processes. 
 
-### Step 10 - Run in the cloud using AWS Batch
+### Step 10 - Modularization with DSL2
 
-The built-in support for [AWS Batch](https://aws.amazon.com/batch/) allows the execution your workflow scripts 
-only changing a few settings in the `nextflow.config` file. For example: 
+Nextflow allow the definition of modules of tasks and sub-workflows.
 
-```
-    process.container = 'nextflow/rnaseq-nf:latest' 
-    process.executor = 'awsbatch'
-    process.queue = 'nextflow-ci'
-    workDir = 's3://nextflow-ci/work'
-    aws.region = 'eu-west-1'
-    aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
-```
+The script `rnaseq-modules.nf` defines the same processes we used in the previously examples.
 
-A S3 bucket must be provide by using the `workDir` configuration setting. Also the name of a queue 
-previously created in the AWS Batch environment needs to be specified using the `process.queue` setting. 
+These tasks are includes in the script `rnaseq-flow.nf` which defines the workflow logic
+to be executed.
 
-See the [AWS Batch documentation](https://www.nextflow.io/docs/latest/awscloud.html#id2) for details.
+Finally the sub-workflow is include in the script `script8.nf` that's used as entry point
+for the sake of this tutorial.
 
+Run this example with the command:
 
-### Step 11 - Use configuration profiles 
+    nextflow run script8.nf
+
+### Step 11 - Use configuration profiles
 
 The Nextflow configuration file can be organised in different profiles 
 to allow the specification of separate settings depending on the target execution environment. 
@@ -652,23 +648,26 @@ See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) f
 
 Note: runtime metrics may be incomplete for run short running tasks as in the case of this tutorial.
 
-### Step 15 - Modularization with DSL2
+### Step 15 - Run in the cloud using AWS Batch
 
-Nextflow allow the definition of modules of tasks and sub-workflows. 
+The built-in support for [AWS Batch](https://aws.amazon.com/batch/) allows the execution your workflow scripts 
+only changing a few settings in the `nextflow.config` file. For example:
 
-The script `rnaseq-tasks.nf` defines the same processes we used in the previously examples. 
+```
+    process.container = 'nextflow/rnaseq-nf:latest' 
+    process.executor = 'awsbatch'
+    process.queue = 'nextflow-ci'
+    workDir = 's3://nextflow-ci/work'
+    aws.region = 'eu-west-1'
+    aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
+```
 
-These tasks are includes in the script `rnaseq-flow.nf` which defines the workflow logic 
-to be executed. 
+A S3 bucket must be provide by using the `workDir` configuration setting. Also the name of a queue
+previously created in the AWS Batch environment needs to be specified using the `process.queue` setting.
 
-Finally the sub-workflow is include in the script `script8.nf` that's used as entry point 
-for the sake of this tutorial.
+See the [AWS Batch documentation](https://www.nextflow.io/docs/latest/awscloud.html#id2) for details.
 
-Run this example with the command: 
-
-    nextflow run script8.nf
-
-## Docker hands-on 
+## Docker hands-on
 
 Get practice with basic Docker commands to pull, run and build your own containers.
  
