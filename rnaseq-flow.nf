@@ -1,5 +1,5 @@
 /* 
- * include required tasks
+ * include required modules
  */
 include { index; quantification; fastqc; multiqc  } from './rnaseq-modules.nf'
 
@@ -19,7 +19,7 @@ workflow rnaseq_flow {
     fastqc(read_files)
     multiqc( quantification.out.mix(fastqc.out).collect() )
 
-    // Optionally, outputs can be named using the emit option
+    // Optionally, outputs can be named using the emit option see https://www.nextflow.io/docs/latest/dsl2.html#process-named-output
     // emit:
     // multiqc_report = multiqc.out.multiqc_report
 }
