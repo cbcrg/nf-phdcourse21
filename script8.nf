@@ -4,7 +4,7 @@
  * 
  * Author: Paolo Di Tommaso 
  */ 
-nextflow.preview.dsl=2
+nextflow.enable.dsl=2
 
 /* 
  * pipeline input parameters 

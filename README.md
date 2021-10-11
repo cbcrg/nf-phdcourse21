@@ -168,6 +168,9 @@ It takes the transcriptome file as input and creates the transcriptome index by 
 Note how the input declaration defines a `transcriptome` variable in the process context
 that it is used in the command script to reference that file in the Salmon command line.
 
+Finally, to trigger the execution of the process the workflow declaration is needed. The `workflow` keyword
+enables the composition of several processes and operators in a sub-workflow.
+
 Try to run it by using the command:
 
 ```console
@@ -266,12 +269,12 @@ In this step you have learned:
 3. How to use the `checkIfExists` option.
 
 
-### Step 4 - Perform expression quantification 
+### Step 4 - Perform expression quantification
 
 The script `script4.nf` adds the `quantification` process.
 
 In this script note as the `index_ch` channel, declared as output in the `index` process,
-is now used as a channel in the input section.  
+is now used as a channel in the input section.  #TODO
 
 Also note as the second input is declared as a `tuple` composed by two elements:
 the `pair_id` and the `reads` in order to match the structure of the items emitted
@@ -515,7 +518,7 @@ Nextflow allow the definition of modules of tasks and sub-workflows.
 
 The script `rnaseq-modules.nf` defines the same processes we used in the previously examples.
 
-These tasks are includes in the script `rnaseq-flow.nf` which defines the workflow logic
+These tasks are included in the script `rnaseq-flow.nf` which defines the workflow logic
 to be executed.
 
 Finally the sub-workflow is include in the script `script8.nf` that's used as entry point
@@ -523,7 +526,9 @@ for the sake of this tutorial.
 
 Run this example with the command:
 
-    nextflow run script8.nf
+```console
+  nextflow run script8.nf
+```
 
 ### Step 11 - Use configuration profiles
 
