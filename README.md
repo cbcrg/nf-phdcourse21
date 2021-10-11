@@ -1,6 +1,14 @@
-# Nextflow training for CRG PhD course 2020
+# Nextflow training for CRG PhD course 2021
 
-Project repository for the Nextflow introductory training taking place online on the 11th of November 2020 in the framework of the CRG PhD introductory course 2020.
+<!-- 
+## TODOs
+
+[ ] Update docker syntax for maintainer
+[ ] Get rid of docker mentions at the beginning
+[ ] Cambiar la presentacion,quitar DSL1 y poner DSL2 en el ejemplo
+-->
+
+Project repository for the Nextflow introductory training taking place online on the 11th of November 2020 in the framework of the CRG PhD introductory course 2021.
 
 ## Table of Contents
 
@@ -37,23 +45,23 @@ Project repository for the Nextflow introductory training taking place online on
 * [Where to get help](#Where-to-get-help)        
 * [More resources](#More-resources)
 
-## Nextflow in a nutshell 
+## Nextflow in a nutshell
 
 A workflow engine for data analysis pipelines with a strong focus on enabling:
 
-* Portability 
-* Reproducibility 
-* Scalability 
-* Usability 
+* Portability
+* Reproducibility
+* Scalability
+* Usability
 
 ### <a name="How"></a> How? 
 
-* Functional/reactive programming model 
-* Decoupling and isolating tasks 
+* Functional/reactive programming model
+* Decoupling and isolating tasks
 * Concise domain specific language for recurrent task operations
-* Pragmatic, allowing quick prototyping and iterations 
+* Pragmatic, allowing quick prototyping and iterations
 * Hide complexity
-* Coexists with errors (!) 
+* Coexists with errors (!)
 
 ### Prerequisites
 
@@ -61,7 +69,7 @@ A workflow engine for data analysis pipelines with a strong focus on enabling:
 * [Java](http://jdk.java.net/) 8 or later
 * [Singularity](https://github.com/sylabs/singularity) 2.5.x (or later)
 * [Docker](https://www.docker.com/) engine 1.10.x (or later, optional)
-* [Conda](https://conda.io/) 4.5 (or later, optional) 
+* [Conda](https://conda.io/) 4.5 (or later, optional)
 * [Graphviz](http://www.graphviz.org/) (optional)
 * [AWS Batch](https://aws.amazon.com/batch/) computing environment properly configured (optional)
 
@@ -69,23 +77,32 @@ A workflow engine for data analysis pipelines with a strong focus on enabling:
 
 Clone this repository with the following command:
 
-```
-git clone https://github.com/cbcrg/nf-phdcourse20.git && cd nf-phdcourse20 
+```console
+git clone https://github.com/cbcrg/nf-phdcourse21.git && cd nf-phdcourse21
 ```
 
-Then, install Nextflow by using the following command: 
+Then, install Nextflow by using the following command:
 
+```console
+curl -s https://get.nextflow.io | bash
 ```
-curl https://get.nextflow.io | bash
-```
-    
+
 The above snippet creates the `nextflow` launcher in the current directory.
 
-Finally pull the following Docker container:
+Finally, copy the Singularity image using the command below:
+
+```console
+mkdir singularity
+cp /nfs/class/cn/phd_course_21/quay.io-nextflow-rnaseq-nf-latest.img ./singularity/
+```
+
+<!-- Finally pull the following Docker container:
 
 ```
-docker pull nextflow/rnaseq-nf
-``` 
+docker pull nextflow/rnaseq-nf -->
+```
+
+> If you are running the tutorial in local with docker then you could use this command instead `docker pull nextflow/rnaseq-nf`
 
 ## Nextflow hands-on 
 
@@ -101,13 +118,13 @@ During this tutorial you will implement a proof of concept of a RNA-seq pipeline
 The script `script1.nf` defines the pipeline input parameters. Run it by using the
 following command:
 
-```
+```console
 ./nextflow run script1.nf
 ```
 
 Try to specify a different input parameter, for example:
 
-```
+```console
 ./nextflow run script1.nf --reads this/and/that
 ```
 
@@ -124,22 +141,22 @@ statement.
 
 Tip: see an example [here](https://github.com/nextflow-io/rnaseq-nf/blob/42974a2/main.nf#L34-L40).
 
-#### Recap 
+#### Recap
 
-In this step you have learned: 
+In this step you have learned:
 
 1. How to define parameters in your pipeline script
 2. How to pass parameters by using the command line
 3. The use of `$var` and `${var}` variable placeholders
-4. How to use multiline strings 
-5. How to use `log.info` to report values 
+4. How to use multiline strings
+5. How to use `log.info` to report values
 
 
 ### Step 2 - Create transcriptome index file
 
 Nextflow allows the execution of any command or user script by using a `process` definition.
 
-A process is defined by providing three main declarations: 
+A process is defined by providing three main declarations:
 the process [inputs](https://www.nextflow.io/docs/latest/process.html#inputs),
 the process [outputs](https://www.nextflow.io/docs/latest/process.html#outputs)
 and finally the command [script](https://www.nextflow.io/docs/latest/process.html#script).
@@ -153,7 +170,7 @@ that it is used in the command script to reference that file in the Salmon comma
 
 Try to run it by using the command:
 
-```
+```console
 ./nextflow run script2.nf
 ```
 
@@ -162,7 +179,7 @@ The execution will fail because Salmon is not installed in your environment.
 Add the command line option `-with-singularity` to launch the execution through a Singularity container
 as shown below:
 
-```
+```console
 ./nextflow run script2.nf -with-singularity
 ```
 
@@ -171,7 +188,7 @@ This time it works because it uses the Singularity container `nextflow/rnaseq-nf
 
 In order to avoid to add the option `-with-singularity` add the following line in the `nextflow.config` file:
 
-```
+```console
 singularity.enabled = true
 ```
 
@@ -183,11 +200,11 @@ Enable the Singularity execution by default adding the above setting in the `nex
 
 Print the output of the `index_ch` channel by using the [view](https://www.nextflow.io/docs/latest/operator.html#view) operator.
 
-#### Exercise 2.3 
+#### Exercise 2.3
 
 Use the command `tree work` to see how Nextflow organises the process work directory.
  
-#### Recap 
+#### Recap
 
 In this step you have learned:
 
@@ -204,7 +221,7 @@ This step shows how to match *read* files into pairs, so they can be mapped by *
 
 Edit the script `script3.nf` and add the following statement as the last line:
 
-```
+```console
 read_pairs_ch.view()
 ```
 
@@ -741,10 +758,14 @@ Alternatively you can use the `.dockerignore` file to select the path to exclude
 Then use your favourite editor eg. `vim` to create a file named `Dockerfile` and copy the
 following content:
 
-```
+```console
 FROM debian:jessie-slim
 
 MAINTAINER <your name>
+
+LABEL maintainer="Your name <youremail@mailprovider.com>"
+LABEL description="Your description"
+LABEL label1="your label"
 
 RUN apt-get update && apt-get install -y curl cowsay 
 
