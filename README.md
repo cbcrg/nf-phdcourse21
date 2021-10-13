@@ -1,13 +1,5 @@
 # Nextflow training for CRG PhD course 2021
 
-<!-- 
-## TODOs
-
-[ ] Update docker syntax for maintainer
-[ ] Get rid of docker mentions at the beginning
-[ ] Cambiar la presentacion,quitar DSL1 y poner DSL2 en el ejemplo
--->
-
 Project repository for the Nextflow introductory training taking place online on the 11th of November 2020 in the framework of the CRG PhD introductory course 2021.
 
 ## Table of Contents
