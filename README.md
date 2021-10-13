@@ -514,14 +514,15 @@ In this step you have learned:
 
 ### Step 10 - Modularization with DSL2
 
-Nextflow allow the definition of modules of tasks and sub-workflows.
+Nextflow allow the definition of modules of tasks and sub-workflows. The resulting modules and sub-workflows
+can be then imported into another Nextflow script using the `include` declaration.
 
 The script `rnaseq-modules.nf` defines the same processes we used in the previously examples.
 
 These tasks are included in the script `rnaseq-flow.nf` which defines the workflow logic
 to be executed.
 
-Finally the sub-workflow is include in the script `script8.nf` that's used as entry point
+Finally the sub-workflow is included in the script `script8.nf` that's used as entry point
 for the sake of this tutorial.
 
 Run this example with the command:
@@ -529,6 +530,19 @@ Run this example with the command:
 ```console
   nextflow run script8.nf
 ```
+
+#### Exercise 10.1
+
+Modify the `index` process in `rnaseq-modules.nf` to emit a named output.
+Then modify the workflow declaration in `rnaseq-flow.nf` accordingly to reference the output channel.
+See Nextflow [documentation](https://www.nextflow.io/docs/latest/dsl2.html#process-named-output) for details.
+
+#### Exercise 10.2
+
+Think how `script8.nf` could be modified to both be included as a sub-workflow in another script and
+be run as a stand alone script.
+
+Tip: only implicit defined workflows can be both included as a sub-workflow or run as an application script, see [here](https://www.nextflow.io/docs/latest/dsl2.html#implicit-workflow).
 
 ### Step 11 - Use configuration profiles
 
@@ -639,7 +653,7 @@ adding the following setting in the `nextflow.config` file:
 process.conda = "env.yml"
 ```
 
-See the [Nextflow](https://www.nextflow.io/docs/latest/conda.html)
+See the [Conda](https://www.nextflow.io/docs/latest/conda.html) section
 in the Nextflow documentation for details.
 
 ### Step 14 - Metrics and reports
