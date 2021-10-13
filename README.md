@@ -1,6 +1,6 @@
 # Nextflow training for CRG PhD course 2021
 
-Project repository for the Nextflow introductory training taking place online on the 11th of November 2020 in the framework of the CRG PhD introductory course 2021.
+Project repository for the Nextflow introductory training taking place online on the 18th of October 2021 in the framework of the CRG PhD introductory course 2021.
 
 ## Table of Contents
 
