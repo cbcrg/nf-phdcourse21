@@ -539,10 +539,18 @@ See Nextflow [documentation](https://www.nextflow.io/docs/latest/dsl2.html#proce
 
 #### Exercise 10.2
 
-Think how `script8.nf` could be modified to both be included as a sub-workflow in another script and
+Think how `script8.nf` could be modified to be either included as a sub-workflow in another script or
 be run as a stand alone script.
 
 Tip: only implicit defined workflows can be both included as a sub-workflow or run as an application script, see [here](https://www.nextflow.io/docs/latest/dsl2.html#implicit-workflow).
+
+#### Recap
+
+In this step you have learned:
+
+1. How to import modules and sub-workflows in a script.
+2. How to declare named process outputs.
+3. How to write a workflow script that can be used either as library module or as an application script.
 
 ### Step 11 - Use configuration profiles
 
