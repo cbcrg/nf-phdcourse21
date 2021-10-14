@@ -4,39 +4,50 @@ Project repository for the Nextflow introductory training taking place online on
 
 ## Table of Contents
 
+* [Prerequisites](#Prerequisites)
 * [Nextflow in a nutshell](#Nextflow-in-a-nutshell)
-    * [How?](#How)
-    * [Prerequisites](#Prerequisites)
+  * [How?](#How)
+  * [Technical requirements](#Technical-requirements)
 * [Installation](#Installation)
 * [Nextflow hands-on](#Nextflow-hands-on)
-    * [1 - Define the pipeline parameters](#Step-1---define-the-pipeline-parameters)        
-    * [2 - Create transcriptome index file](#Step-2---Create-transcriptome-index-file)
-    * [3 - Collect read files by pairs](#Step-3---Collect-read-files-by-pairs)        
-    * [4 - Perform expression quantification](#Step-4---Perform-expression-quantification)        
-    * [5 - Quality control](#Step-5---Quality-control)
-    * [6 - MultiQC report](#Step-6---MultiQC-report)
-    * [7 - Handle completion event](#Step-7---Handle-completion-event)
-    * [8 - Custom scripts](#Step-8---Custom-scripts)
-    * [9 - Modularization with DSL2](#Step-9---Modularization-with-DSL2)
-    * [10 - Executors](#Step-10---Executors)
-    * [11 - Use configuration profiles](#Step-11---Use-configuration-profiles)
-    * [12 - Run a pipeline from a GitHub repository](#Step-12---Run-a-pipeline-from-a-GitHub-repository)
-    * [13 - Conda/Bioconda packages](#Step-13---Condabioconda-packages)
-    * [14 - Metrics and reports](#Step-14---Metrics-and-reports)
-    * [15 - Run in the cloud using AWS Batch](#Step-10---Run-in-the-cloud-using-AWS-Batch)
+  * [1 - Define the pipeline parameters](#Step-1---define-the-pipeline-parameters)
+  * [2 - Create transcriptome index file](#Step-2---Create-transcriptome-index-file)
+  * [3 - Collect read files by pairs](#Step-3---Collect-read-files-by-pairs)
+  * [4 - Perform expression quantification](#Step-4---Perform-expression-quantification)
+  * [5 - Quality control](#Step-5---Quality-control)
+  * [6 - MultiQC report](#Step-6---MultiQC-report)
+  * [7 - Handle completion event](#Step-7---Handle-completion-event)
+  * [8 - Custom scripts](#Step-8---Custom-scripts)
+  * [9 - Modularization with DSL2](#Step-9---Modularization-with-DSL2)
+  * [10 - Executors](#Step-10---Executors)
+  * [11 - Use configuration profiles](#Step-11---Use-configuration-profiles)
+  * [12 - Run a pipeline from a GitHub repository](#Step-12---Run-a-pipeline-from-a-GitHub-repository)
+  * [13 - Conda/Bioconda packages](#Step-13---Condabioconda-packages)
+  * [14 - Metrics and reports](#Step-14---Metrics-and-reports)
+  * [15 - Run in the cloud using AWS Batch](#Step-10---Run-in-the-cloud-using-AWS-Batch)
 * [Docker hands-on](#Docker-hands-on)
-    * [1 - Run a container](#Step-1---Run-a-container)
-    * [2 - Pull a container](#Step-2---Pull-a-container)
-    * [3 - Run a container in interactive mode](#Step-3---Run-a-container-in-interactive-mode)
-    * [4 - Your first Dockerfile](#Step-4---Your-first-Dockerfile)
-    * [5 - Build the image](#Step-5---Build-the-image)
-    * [6 - Add a software package to the image](#Step-6---Add-a-software-package-to-the-image)
-    * [7 - Run Salmon in the container](#Step-7---Run-Salmon-in-the-container)
-    * [8 - File system mounts](#Step-8---File-system-mounts)
-    * [9 - Upload the container in the Docker Hub (bonus)](#DockerHub)
-* [Where to get help](#Where-to-get-help)        
+  * [1 - Run a container](#Step-1---Run-a-container)
+  * [2 - Pull a container](#Step-2---Pull-a-container)
+  * [3 - Run a container in interactive mode](#Step-3---Run-a-container-in-interactive-mode)
+  * [4 - Your first Dockerfile](#Step-4---Your-first-Dockerfile)
+  * [5 - Build the image](#Step-5---Build-the-image)
+  * [6 - Add a software package to the image](#Step-6---Add-a-software-package-to-the-image)
+  * [7 - Run Salmon in the container](#Step-7---Run-Salmon-in-the-container)
+  * [8 - File system mounts](#Step-8---File-system-mounts)
+  * [9 - Upload the container in the Docker Hub (bonus)](#DockerHub)
+* [Where to get help](#Where-to-get-help)
 * [More resources](#More-resources)
 
+## Requirements
+
+To correctly follow this course attendees should be familiar with:
+
+* UNIX-based environments (i.e. basic UNIX commands)
+* CLI (command-line interface)
+* Scripting languages
+* Basic knowledge of bioinformatics tools
+
+**If you don't meet all the requirements listed above, we would like to warn you that it is possible that you could not follow the pace of the course since it was designed for the "advanced" group. Of course, we will happy if you still want to join us just following our explanations and revisit the course in the future since it will be openly available on github.**
 ## Nextflow in a nutshell
 
 A workflow engine for data analysis pipelines with a strong focus on enabling:
@@ -55,7 +66,7 @@ A workflow engine for data analysis pipelines with a strong focus on enabling:
 * Hide complexity
 * Coexists with errors (!)
 
-### Prerequisites
+### Technical requirements
 
 * Unix-like OS (Linux, macOS, etc.)
 * [Java](http://jdk.java.net/) 8 or later
@@ -91,9 +102,9 @@ cp /nfs/class/cn/phd_course_21/quay.io-nextflow-rnaseq-nf-latest.img ./singulari
 <!-- Finally pull the following Docker container:
 
 ```
-docker pull nextflow/rnaseq-nf
-```  
--->
+docker pull nextflow/rnaseq-nf -->
+```
+
 > If you are running the tutorial in local with docker then you could use this command instead `docker pull nextflow/rnaseq-nf`
 
 ## Nextflow hands-on 
