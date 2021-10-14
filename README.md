@@ -38,7 +38,7 @@ Project repository for the Nextflow introductory training taking place online on
 * [Where to get help](#Where-to-get-help)
 * [More resources](#More-resources)
 
-## Requirements
+## Prerequisites
 
 To correctly follow this course attendees should be familiar with:
 
@@ -47,7 +47,7 @@ To correctly follow this course attendees should be familiar with:
 * Scripting languages
 * Basic knowledge of bioinformatics tools
 
-**If you don't meet all the requirements listed above, we would like to warn you that it is possible that you could not follow the pace of the course since it was designed for the "advanced" group. Of course, we will happy if you still want to join us just following our explanations and revisit the course in the future since it will be openly available on github.**
+**If you don't meet all the prerequisites listed above, we would like to warn you that it is possible that you could not follow the pace of the course since it was designed for the "advanced" group. Of course, we will happy if you still want to join us just following our explanations and revisit the course in the future since it will be openly available on github.**
 ## Nextflow in a nutshell
 
 A workflow engine for data analysis pipelines with a strong focus on enabling:
