@@ -332,27 +332,22 @@ You can run it by using the following command:
 ./nextflow run script5.nf -resume 
 ```
 
-The script will report the following error message:
+<!-- The script will report the following error message:
 
 ```
 Channel `read_pairs_ch` has been used twice as an input by process `fastqc` and process `quantification`
-```
-
+``` -->
 
 #### Exercise 5.1
 
-Modify the creation of the `read_pairs_ch` channel by using a [into](https://www.nextflow.io/docs/latest/operator.html#into)
-operator in place of a `set`.  
-
-Tip: see an example [here](https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L58).
-
+Rename the `read_pairs_ch` channel by using a [set](https://www.nextflow.io/docs/latest/operator.html#set)
+operator and provide the newly created channel only to the `fastqc` process.
 
 #### Recap
 
 In this step you have learned:
 
-1. How to use the `into` operator to create multiple copies of the same channel
-
+1. How to use the `set` operator to create a renamed copy of a channel.
 
 ### Step 6 - MultiQC report
 
