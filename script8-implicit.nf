@@ -1,9 +1,7 @@
 /* 
  * Example showing pipeline modularizaion 
  * Using Nextfloq DSL2
- * 
- * Author: Paolo Di Tommaso 
- */ 
+ */
 nextflow.enable.dsl=2
 
 /* 
@@ -27,6 +25,10 @@ include { rnaseq_flow } from './rnaseq-flow.nf'
 
 read_pairs_ch = Channel.fromFilePairs( params.reads, checkIfExists:true )
 
-workflow {
+workflow rnaseq_implicit {
     rnaseq_flow( params.transcript, read_pairs_ch )
+}
+
+workflow {
+    rnaseq_implicit()
 }

@@ -8,7 +8,7 @@ process index {
     
     input:
     path transcriptome 
-     
+
     output:
     path 'index'
 
@@ -23,14 +23,14 @@ process index {
  * the index and the matched read files
  */
 process quantification {
-     
+
     input:
     path index
     tuple val(pair_id), path(reads)
- 
+
     output:
     path(pair_id)
- 
+
     script:
     """
     salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
@@ -68,6 +68,8 @@ process multiqc {
 
     output:
     path('multiqc_report.html')
+    // Optionally, outputs can be named using the emit option
+    // path('multiqc_report.html'), emit: multiqc_report 
 
     script:
     """
