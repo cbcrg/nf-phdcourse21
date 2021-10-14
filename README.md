@@ -91,9 +91,9 @@ cp /nfs/class/cn/phd_course_21/quay.io-nextflow-rnaseq-nf-latest.img ./singulari
 <!-- Finally pull the following Docker container:
 
 ```
-docker pull nextflow/rnaseq-nf -->
-```
-
+docker pull nextflow/rnaseq-nf
+```  
+-->
 > If you are running the tutorial in local with docker then you could use this command instead `docker pull nextflow/rnaseq-nf`
 
 ## Nextflow hands-on 
