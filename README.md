@@ -111,7 +111,7 @@ docker pull nextflow/rnaseq-nf
 
 During this tutorial you will implement a proof of concept of a RNA-seq pipeline which:
 
-1. Indexes a trascriptome file.
+1. Indexes a transcriptome file.
 2. Performs quality controls 
 3. Performs quantification.
 4. Create a MultiqQC report. 
