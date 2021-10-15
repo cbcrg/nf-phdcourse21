@@ -107,16 +107,16 @@ docker pull nextflow/rnaseq-nf
 
 > If you are running the tutorial in local with docker then you could use this command instead `docker pull nextflow/rnaseq-nf`
 
-## Nextflow hands-on 
+## Nextflow hands-on
 
 During this tutorial you will implement a proof of concept of a RNA-seq pipeline which:
 
-1. Indexes a transcriptome file.
-2. Performs quality controls 
-3. Performs quantification.
-4. Create a MultiqQC report. 
+1. Indexes a transcriptome file
+2. Performs quality controls
+3. Performs quantification
+4. Creates a MultiqQC report
 
-### Step 1 - define the pipeline parameters 
+### Step 1 - define the pipeline parameters
 
 The script `script1.nf` defines the pipeline input parameters. Run it by using the
 following command:
@@ -133,7 +133,7 @@ Try to specify a different input parameter, for example:
 
 #### Exercise 1.1
 
-Modify the `script1.nf` adding a fourth parameter named `outdir` and set it to a default path
+Modify the `script1.nf` by adding a fourth parameter named `outdir` and set it to a default path
 that will be used as the pipeline output directory.
 
 #### <a name="ex-1.2"></a>  Exercise 1.2
@@ -164,12 +164,12 @@ the process [inputs](https://www.nextflow.io/docs/latest/process.html#inputs),
 the process [outputs](https://www.nextflow.io/docs/latest/process.html#outputs)
 and finally the command [script](https://www.nextflow.io/docs/latest/process.html#script).
 
-The second example adds the `index` process. Open it to see how the process is defined.
+The second example `script2.nf` adds the `index` process. Open it to see how the process is defined.
 
 It takes the transcriptome file as input and creates the transcriptome index by using the `salmon` tool.
 
 Note how the input declaration defines a `transcriptome` variable in the process context
-that it is used in the command script to reference that file in the Salmon command line.
+that is used in the command script to reference that file in the Salmon command line.
 
 Finally, to trigger the execution of the process the workflow declaration is needed. The `workflow` keyword
 enables the composition of several processes and operators in a sub-workflow.
@@ -240,7 +240,7 @@ Save it and execute it with the following command:
 It will print an output similar to the one shown below:
 
 ```
-[ggal_gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
+[gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
 ```
 
 The above example shows how the `read_pairs_ch` channel emits tuples composed by
@@ -276,10 +276,9 @@ In this step you have learned:
 
 The script `script4.nf` adds the `quantification` process.
 
-In this script note as the `index_ch` channel, declared as output in the `index` process,
-is now used as a channel in the input section.  #TODO
+Note that the workflow concatenates both processes by channeling the `index` output into the `quantification` process.  
 
-Also note as the second input is declared as a `tuple` composed by two elements:
+Also note that the second input of the `quantification` process is declared as a `tuple` composed by two elements:
 the `pair_id` and the `reads` in order to match the structure of the items emitted
 by the `read_pairs_ch` channel.
 
@@ -292,7 +291,7 @@ Execute it by using the following command:
 
 You will see the execution of the `quantification` process.
 
-The `-resume` option cause the execution of any step that has been already processed to be skipped.
+The `-resume` option causes the execution of any step that has been already processed to be skipped.
 
 Try to execute it with more read files as shown below:
 
@@ -310,15 +309,15 @@ to your script.
 #### Exercise 4.1
 
 Add a [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directive
-to the `quantification` process to store the process results into a directory of your choice.
+to the `quantification` process to store the process results in a directory of your choice.
 
 #### Recap
 
 In this step you have learned:
  
-1. How to connect two processes by using the channel declarations
-2. How to resume the script execution skipping already already computed steps
-3. How to use the `publishDir` to store a process results in a path of your choice
+1. How to connect two processes
+2. How to resume the script execution skipping already computed steps
+3. How to use the `publishDir` to store process results in a path of your choice
 
 
 ### Step 5 - Quality control 
@@ -351,7 +350,7 @@ In this step you have learned:
 
 ### Step 6 - MultiQC report
 
-This step collect the outputs from the `quantification` and `fastqc` steps to create
+This step collects the outputs from the `quantification` and `fastqc` steps to create
 a final report by using the [MultiQC](http://multiqc.info/) tool.
  
 
@@ -397,7 +396,7 @@ Try to run it by using the following command:
 
 #### Bonus!
 
-Send a notification email when the workflow execution complete using the `-N <email address>`
+Send a notification email when the workflow execution completes using the `-N <email address>`
 command line option. Note: this requires the configuration of a SMTP server in nextflow config
 file. See [mail documentation](https://www.nextflow.io/docs/latest/mail.html#mail-configuration)
 for details.
@@ -452,20 +451,20 @@ Run it as before:
 
 In this step you have learned:
 
-1. How to write or use existing custom script in your Nextflow pipeline.
-2. How to avoid the use of absolute paths having your scripts in the `bin/` project folder.
+1. How to write or use existing custom scripts in your Nextflow pipeline.
+2. How to avoid the use of absolute paths by having your scripts in the `bin/` project folder.
 
 ### Step 9 - Modularization with DSL2
 
-Nextflow allow the definition of modules of tasks and sub-workflows. The resulting modules and sub-workflows
+Nextflow allows the definition of modules of tasks and sub-workflows. The resulting modules and sub-workflows
 can be then imported into another Nextflow script using the `include` declaration.
 
-The script `rnaseq-modules.nf` defines the same processes we used in the previously examples.
+The script `rnaseq-modules.nf` defines the same processes we used in the previous examples.
 
 These tasks are included in the script `rnaseq-flow.nf` which defines the workflow logic
 to be executed.
 
-Finally the sub-workflow is included in the script `script8.nf` that's used as entry point
+Finally, the sub-workflow is included in the script `script8.nf` that's used as entry point
 for the sake of this tutorial.
 
 Run this example with the command:
@@ -501,8 +500,8 @@ Real world genomic application can spawn the execution of thousands of jobs. In 
 scenario a batch scheduler is commonly used to deploy a pipeline in a computing cluster,
 allowing the execution of many jobs in parallel across many computing nodes.
 
-Nextflow has built-in support for most common used batch schedulers such as Univa Grid Engine
-and SLURM between the [others](https://www.nextflow.io/docs/latest/executor.html).
+Nextflow has built-in support for the most common used batch schedulers such as Univa Grid Engine
+and SLURM and [others](https://www.nextflow.io/docs/latest/executor.html).
 
 To run your pipeline with a batch scheduler modify the `nextflow.config` file specifying
 the target executor and the required computing resources if needed. For example:
@@ -515,7 +514,7 @@ process.time = '30 min'
 process.cpus = 4
 ```
 
-The above configuration specify the use of the SLURM batch scheduler to run the
+The above configuration specifies the use of the SLURM batch scheduler to run the
 jobs spawned by your pipeline script. Then it specifies to use the `short` queue (partition),
 10 gigabyte of memory and 4 CPUs per job, and each job can run for no more than 30 minutes.
 
@@ -536,7 +535,7 @@ and verify it contains the SLURM `#SBATCH` directives for the requested resource
 
 #### Exercise 10.2
 
-Modify the configuration file to specify different resource request for
+Modify the configuration file to specify different resources requested for
 the `quantification` process.
 
 Tip: see the [process](https://www.nextflow.io/docs/latest/config.html#scope-process) documentation for an example.
@@ -559,7 +558,8 @@ For the sake of this tutorial modify the `nextflow.config` as shown below:
 profiles {
   standard {
     process.container = 'nextflow/rnaseq-nf'
-    docker.enabled = true
+    singularity.autoMounts = true
+    singularity.enabled = true
   }
   
   cluster {
@@ -614,7 +614,7 @@ https://github.com/nextflow-io/rnaseq-nf
 You can run it by specifying the project name as shown below:
 
 ```
-./nextflow run nextflow-io/rnaseq-nf -with-docker
+./nextflow run nextflow-io/rnaseq-nf -with-singularity
 ```
 
 It automatically downloads it and store in the `$HOME/.nextflow` folder.
@@ -632,7 +632,7 @@ command line option. For Example:
 ./nextflow run nextflow-io/rnaseq-nf -r dev
 ```
 
-Revision are defined by using Git tags or branches defined in the project repository.
+Revisions are defined by using Git tags or branches defined in the project repository.
 
 This allows a precise control of the changes in your project files and dependencies over time.
 
@@ -640,7 +640,7 @@ This allows a precise control of the changes in your project files and dependenc
 ### Step 13 - Conda/Bioconda packages
 
 Conda is popular package and environment manager. The built-in support for Conda
-allows Nextflow pipelines to automatically creates and activates the Conda
+allows Nextflow pipelines to automatically create and activate the Conda
 environment(s) given the dependencies specified by each process.
 
 To use a Conda environment with Nextflow specify it as a command line option
@@ -650,7 +650,7 @@ as shown below:
 ./nextflow run script7.nf -with-conda env.yml
 ```
 
-The use of a Conda environment can also be provided in the configuration file
+The use of a Conda environment can also be provided in the configuration file by
 adding the following setting in the `nextflow.config` file:
 
 ```
@@ -669,29 +669,29 @@ Run the [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) pipeline
 previously introduced as shown below:
 
 ```
-./nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
+./nextflow run rnaseq-nf -with-singularity -with-report -with-trace -with-timeline -with-dag dag.png
 ```
 
 The `-with-report` option enables the creation of the workflow execution report. Open
 the file `report.html` with a browser to see the report created with the above command.
 
-The `-with-trace` option enables the create of a tab separated file containing runtime
+The `-with-trace` option enables the creation of a tab separated file containing runtime
 information for each executed task. Check the content of the file `trace.txt` for an example.
 
 The `-with-timeline` option enables the creation of the workflow timeline report showing
-how processes where executed along time. This may be useful to identify most time consuming
+how processes where executed along time. This may be useful to identify the most time consuming
 tasks and bottlenecks. See an example at [this link](https://www.nextflow.io/docs/latest/tracing.html#timeline-report).
 
 Finally the `-with-dag` option enables to rendering of the workflow execution direct acyclic graph
 representation. Note: this feature requires the installation of [Graphviz](http://www.graphviz.org/) in your computer.
 See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for details.
 
-Note: runtime metrics may be incomplete for run short running tasks as in the case of this tutorial.
+Note: runtime metrics may be incomplete for short running tasks as in the case of this tutorial.
 
 ### Step 15 - Run in the cloud using AWS Batch
 
-The built-in support for [AWS Batch](https://aws.amazon.com/batch/) allows the execution your workflow scripts
-only changing a few settings in the `nextflow.config` file. For example:
+The built-in support for [AWS Batch](https://aws.amazon.com/batch/) allows the execution of your workflow scripts
+by only changing a few settings in the `nextflow.config` file. For example:
 
 ```
     process.container = 'nextflow/rnaseq-nf:latest'
@@ -702,7 +702,7 @@ only changing a few settings in the `nextflow.config` file. For example:
     aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 ```
 
-A S3 bucket must be provide by using the `workDir` configuration setting. Also the name of a queue
+A S3 bucket must be provided by using the `workDir` configuration setting. Also the name of a queue
 previously created in the AWS Batch environment needs to be specified using the `process.queue` setting.
 
 See the [AWS Batch documentation](https://www.nextflow.io/docs/latest/awscloud.html#id2) for details.
@@ -758,7 +758,7 @@ in the containerised operating system. For example:
 docker run -it debian:jessie-slim bash
 ```
 
-Once launched the container you wil noticed that's running as root (!).
+Once launched the container you will noticed that's running as root (!).
 Use the usual commands to navigate in the file system.
 
 To exit from the container, stop the BASH session with the exit command.
