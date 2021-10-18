@@ -189,7 +189,7 @@ as shown below:
 ./nextflow run script2.nf -with-singularity
 ```
 
-This time it works because it uses the Singularity container `nextflow/rnaseq-nf` defined in the
+This time it works because it uses the Singularity container `quay.io/nextflow/rnaseq-nf:latest` defined in the
 `nextflow.config` file.
 
 In order to avoid to add the option `-with-singularity` add the following line in the `nextflow.config` file:
@@ -282,7 +282,6 @@ Also note that the second input of the `quantification` process is declared as a
 the `pair_id` and the `reads` in order to match the structure of the items emitted
 by the `read_pairs_ch` channel.
 
-
 Execute it by using the following command:
 
 ```
@@ -339,14 +338,13 @@ Channel `read_pairs_ch` has been used twice as an input by process `fastqc` and 
 
 #### Exercise 5.1
 
-Rename the `read_pairs_ch` channel by using a [set](https://www.nextflow.io/docs/latest/operator.html#set)
-operator and provide the newly created channel only to the `fastqc` process.
-
+Use the [tag](https://www.nextflow.io/docs/latest/process.html?highlight=tag#tag) directive to declare a costum
+label that will be shown in the different logs.
 #### Recap
 
 In this step you have learned:
 
-1. How to use the `set` operator to create a renamed copy of a channel.
+1. How to use the `tag` directive to associate each process execution with a custom label.
 
 ### Step 6 - MultiQC report
 
@@ -461,7 +459,7 @@ can be then imported into another Nextflow script using the `include` declaratio
 
 The script `rnaseq-modules.nf` defines the same processes we used in the previous examples.
 
-These tasks are included in the script `rnaseq-flow.nf` which defines the workflow logic
+These tasks are included in the script `rnaseq-flow.nf` which declares the workflow logic
 to be executed.
 
 Finally, the sub-workflow is included in the script `script8.nf` that's used as entry point
@@ -481,8 +479,7 @@ See Nextflow [documentation](https://www.nextflow.io/docs/latest/dsl2.html#proce
 
 #### Exercise 9.2
 
-Think how `script8.nf` could be modified to be either included as a sub-workflow in another script or
-be run as a stand alone script.
+Think how `rnaseq-flow.nf` could be modified to be included as a sub-workflow in another script (previous example) but also to be run as a stand alone script.
 
 Tip: only implicit defined workflows can be both included as a sub-workflow or run as an application script, see [here](https://www.nextflow.io/docs/latest/dsl2.html#implicit-workflow).
 
@@ -557,7 +554,7 @@ For the sake of this tutorial modify the `nextflow.config` as shown below:
 ```
 profiles {
   standard {
-    process.container = 'nextflow/rnaseq-nf'
+    process.container = 'quay.io/nextflow/rnaseq-nf:latest'
     singularity.autoMounts = true
     singularity.enabled = true
   }
@@ -571,7 +568,7 @@ profiles {
   }
 
   batch {
-    process.container = 'nextflow/rnaseq-nf:latest' 
+    process.container = 'quay.io/nextflow/rnaseq-nf:latest' 
     process.executor = 'awsbatch'
     process.queue = 'nextflow-ci'
     workDir = 's3://nextflow-ci/work'
@@ -694,7 +691,7 @@ The built-in support for [AWS Batch](https://aws.amazon.com/batch/) allows the e
 by only changing a few settings in the `nextflow.config` file. For example:
 
 ```
-    process.container = 'nextflow/rnaseq-nf:latest'
+    process.container = 'quay.io/nextflow/rnaseq-nf:latest'
     process.executor = 'awsbatch'
     process.queue = 'nextflow-ci'
     workDir = 's3://nextflow-ci/work'

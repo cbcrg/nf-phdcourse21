@@ -21,14 +21,19 @@ log.info """\
          """
          .stripIndent()
 
-include { rnaseq_flow } from './rnaseq-flow.nf'
+include { rnaseq_flow } from './rnaseq-flow-implicit.nf'
 
 read_pairs_ch = Channel.fromFilePairs( params.reads, checkIfExists:true )
 
-workflow rnaseq_implicit {
+workflow {
     rnaseq_flow( params.transcript, read_pairs_ch )
 }
 
-workflow {
-    rnaseq_implicit()
-}
+// You can also declare again here implicitely the workflow
+// workflow rnaseq_implicit {
+//     rnaseq_flow( params.transcript, read_pairs_ch )
+// }
+
+// workflow {
+//     rnaseq_implicit()
+// }
