@@ -611,7 +611,7 @@ https://github.com/nextflow-io/rnaseq-nf
 You can run it by specifying the project name as shown below:
 
 ```
-./nextflow run cbcrg/rnaseq-nf -with-singularity
+./nextflow run nextflow-io/rnaseq-nf -with-singularity
 ```
 
 It automatically downloads it and store in the `$HOME/.nextflow` folder.
