@@ -81,13 +81,13 @@ A workflow engine for data analysis pipelines with a strong focus on enabling:
 
 Clone this repository with the following command:
 
-```console
+```
 git clone https://github.com/cbcrg/nf-phdcourse21.git && cd nf-phdcourse21
 ```
 
 Then, install Nextflow by using the following command:
 
-```console
+```
 curl -s https://get.nextflow.io | bash
 ```
 
@@ -95,7 +95,7 @@ The above snippet creates the `nextflow` launcher in the current directory.
 
 Finally, copy the Singularity image using the command below:
 
-```console
+```
 mkdir singularity
 cp /nfs/class/cn/phd_course_21/quay.io-nextflow-rnaseq-nf-latest.img ./singularity/
 ```
@@ -122,13 +122,13 @@ During this tutorial you will implement a proof of concept of a RNA-seq pipeline
 The script `script1.nf` defines the pipeline input parameters. Run it by using the
 following command:
 
-```console
+```
 ./nextflow run script1.nf
 ```
 
 Try to specify a different input parameter, for example:
 
-```console
+```
 ./nextflow run script1.nf --reads this/and/that
 ```
 
@@ -177,7 +177,7 @@ enables the composition of several processes and operators in a sub-workflow.
 
 Try to run it by using the command:
 
-```console
+```
 ./nextflow run script2.nf
 ```
 
@@ -186,7 +186,7 @@ The execution will fail because Salmon is not installed in your environment.
 Add the command line option `-with-singularity` to launch the execution through a Singularity container
 as shown below:
 
-```console
+```
 ./nextflow run script2.nf -with-singularity
 ```
 
@@ -195,7 +195,7 @@ This time it works because it uses the Singularity container `nextflow/rnaseq-nf
 
 In order to avoid to add the option `-with-singularity` add the following line in the `nextflow.config` file:
 
-```console
+```
 singularity.enabled = true
 ```
 
@@ -228,7 +228,7 @@ This step shows how to match *read* files into pairs, so they can be mapped by *
 
 Edit the script `script3.nf` and add the following statement as the last line:
 
-```bash
+```
 read_pairs_ch.view()
 ```
 
@@ -470,7 +470,7 @@ for the sake of this tutorial.
 
 Run this example with the command:
 
-```console
+```
   nextflow run script8.nf
 ```
 
@@ -782,7 +782,7 @@ Alternatively you can use the `.dockerignore` file to select the path to exclude
 Then use your favourite editor eg. `vim` to create a file named `Dockerfile` and copy the
 following content:
 
-```console
+```
 FROM debian:jessie-slim
 
 MAINTAINER <your name>
