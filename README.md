@@ -611,7 +611,7 @@ https://github.com/nextflow-io/rnaseq-nf
 You can run it by specifying the project name as shown below:
 
 ```
-./nextflow run nextflow-io/rnaseq-nf -with-singularity
+./nextflow run cbcrg/rnaseq-nf -with-singularity
 ```
 
 It automatically downloads it and store in the `$HOME/.nextflow` folder.
@@ -626,7 +626,7 @@ Nextflow allows the execution of a specific *revision* of your project by using 
 command line option. For Example:
 
 ```
-./nextflow run nextflow-io/rnaseq-nf -r dev
+./nextflow run nextflow-io/rnaseq-nf -r dsl2
 ```
 
 Revisions are defined by using Git tags or branches defined in the project repository.
