@@ -96,8 +96,7 @@ The above snippet creates the `nextflow` launcher in the current directory.
 Finally, copy the Singularity image using the command below:
 
 ```
-mkdir singularity
-cp /nfs/class/cn/phd_course_21/quay.io-nextflow-rnaseq-nf-latest.img ./singularity/
+mkdir singularity && cp /nfs/class/cn/phd_course_21/quay.io-nextflow-rnaseq-nf-latest.img ./singularity/
 ```
 
 <!-- Finally pull the following Docker container:
