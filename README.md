@@ -48,6 +48,7 @@ To correctly follow this course attendees should be familiar with:
 * Basic knowledge of bioinformatics tools
 
 **If you don't meet all the prerequisites listed above, we would like to warn you that it is possible that you could not follow the pace of the course since it was designed for the "advanced" group. Of course, we will happy if you still want to join us just following our explanations and revisit the course in the future since it will be openly available on github.**
+
 ## Nextflow in a nutshell
 
 A workflow engine for data analysis pipelines with a strong focus on enabling:
@@ -227,7 +228,7 @@ This step shows how to match *read* files into pairs, so they can be mapped by *
 
 Edit the script `script3.nf` and add the following statement as the last line:
 
-```console
+```bash
 read_pairs_ch.view()
 ```
 
