@@ -788,8 +788,6 @@ following content:
 ```
 FROM debian:jessie-slim
 
-MAINTAINER <your name>
-
 LABEL maintainer="Your name <youremail@mailprovider.com>"
 LABEL description="Your description"
 LABEL label1="your label"
