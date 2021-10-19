@@ -93,6 +93,13 @@ curl -s https://get.nextflow.io | bash
 
 The above snippet creates the `nextflow` launcher in the current directory.
 
+Then, please load version 3.8.3 of Singularity on your environment using the command below:
+
+```
+module use /software/as/el7.2/EasyBuild/CRG/modules/all
+module load Singularity/3.8.3
+```
+
 Finally, copy the Singularity image using the command below:
 
 ```
